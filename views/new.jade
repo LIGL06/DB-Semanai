@@ -1,4 +1,11 @@
 extends layout
+//idLugar: Number,
+//nombreLugar: String,
+//subnombreLugar: String,
+//descLugar: String,
+//historiaLugar: String,
+//fotoLugar: String,
+//coordenadasLugar:String,
 
 block content
   .container
@@ -8,19 +15,29 @@ block content
         .panel.panel-default
           .panel-body
             p.text-center Opciones de #{title}
-            form(method='POST', action='/dashboard/new')
-              .form-group
+            form(method='POST', action='/dashboard/new', enctype='multipart/form-data')
+              .form-group.col-md-6
+                label(for='idLugar') Numero
+                input#idLugar.form-control(type='number', placeholder='Numero de Lugar', name='idLugar')
+              .form-group.col-md-6
                 label(for='nombreLugar') Nombre punto de interes
                 input#nombreLugar.form-control(type='text', placeholder='Nombre punto de interes', name='nombreLugar')
-              .form-group
-                label(for='descLugar') Descripción del punto de interes
-                input#descLugar.form-control(type='textarea', placeholder='Descripción del punto de interes', name='descLugar')
-              .form-group
+              .form-group.col-md-6
+                label(for='subnombreLugar') Subnombre del punto de interes
+                input#subnombreLugar.form-control(type='text', placeholder='Subnombre del punto de interes', name='subnombreLugar')
+              .form-group.col-md-6
+                label(for='descLugar') Descripción de punto de interes
+                input#descLugar.form-control(type='text', placeholder='Descripción', name='descLugar')
+              .form-group.col-md-9
+                label(for='historiaLugar') Historia de punto de interes
+                input#historiaLugar.form-control(type='text', placeholder='Historia', name='historiaLugar')
+              .form-group.col-md-9
+                label(for='coordenadasLugar') Mapa del punto de interes
+                iframe(name='coordenadasLugar', src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d14756.6614988593!2d-97.89938625!3d22.385122250000002!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2smx!4v1474909418479" width="800" height="300" frameborder="0" style="border:0" allowfullscreen)
+                input#coordenadasLugar.form-control(type='text', placeholder='Coordenadas', name='coordenadasLugar')
+              .form-group.col-md-12
                 label(for='fotoLugar') Fotografía del punto de interes
-                input#fotoLugar(type='file')
+                input#fotoLugar(type='file', name='fotoLugar')
                 p.help-block(style='font-size:16px;') No es necesario una fotografia, puede editarse despues.
-              .checkbox
-                label
-                  input(type='checkbox')
-                  |  Lugar activo?
-              button.btn.btn-default(type='submit') Guardar
+              .form-group.col-md-1
+                button.btn.btn-info(type='submit') Guardar
