@@ -2,8 +2,8 @@ var express = require('express');
 var stormpath = require('express-stormpath');
 var mongoose = require('mongoose');
 var multer = require('multer');
-var storage = multer.diskStorage({destination: 'uploads/',filename: function(req,file,cb){
-  cb(null, file.originalname + '-' + Date.now()+'.jpg')
+var storage = multer.diskStorage({destination: 'public/uploads/',filename: function(req,file,cb){
+  cb(null, Date.now()+'.jpg')
 }});
 var upload = multer({storage:storage})
 var Place = require('../models/event').Place;
@@ -15,11 +15,25 @@ router.get('/',stormpath.loginRequired,function(req, res, next) {
 });
 
 router.get('/events',stormpath.loginRequired,function(req, res, next) {
-  res.render('events', { title: 'Panel de Eventos' });
+  Place.find(function(err,doc){
+    if (err) {
+      res.send('Error')
+    }
+    res.render('events',{places:doc, title: 'Panel de puntos de interes'})
+  })
 });
 
+router.get('/events/:id', stormpath.loginRequired,function(req, res, next){
+  Place.findOne({_id:req.params.id}, function(err,doc){
+    if (err) {
+      res.send(err)
+    }
+    res.send(doc)
+  })
+})
+
 router.get('/new',stormpath.loginRequired,function(req, res, next) {
-  res.render('new', { title: 'Panel de Nuevo Evento' });
+  res.render('new', { title: 'Panel de nuevo punto de interes' });
 });
 
 router.post('/new',stormpath.loginRequired,upload.single('fotoLugar'),function(req, res, next){
@@ -30,9 +44,19 @@ router.post('/new',stormpath.loginRequired,upload.single('fotoLugar'),function(r
     descLugar: req.body.descLugar,
     historiaLugar: req.body.historiaLugar,
     coordenadasLugar: req.body.coordenadasLugar,
-    fotoLugar: req.file.path
   })
-  res.send(place);
+  if (req.files) {
+    fotoLugar: req.file.path
+  }else {
+    fotoLugar: 'sample.png'
+  }
+  place.save().then(function(){
+    res.send('¡Éxito!')
+  }, function(error){
+    if (error) {
+      res.send('¡Error!')
+    }
+  })
 })
 
 router.get('/edit/#{id}',stormpath.loginRequired,function(req, res, next) {

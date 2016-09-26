@@ -1,5 +1,11 @@
 extends layout
-
+//idLugar: Number,
+//nombreLugar: String,
+//subnombreLugar: String,
+//descLugar: String,
+//historiaLugar: String,
+//fotoLugar: String,
+//coordenadasLugar:String,
 block content
   .container
     .row
@@ -7,3 +13,12 @@ block content
         h1.text-center Bienvenido a #{title}
         .panel.panel-default
           .panel-body
+            each place in places
+              hr
+              p ID: #{place._id}
+              p Nombre: #{place.nombreLugar}
+              p SubNombre: #{place.subnombreLugar}
+              p Descripcion: #{place.descLugar}
+              p Historia: #{place.historiaLugar}
+              p Foto: #[img(src='/#{place.fotoLugar}')]
+              p Coordernadas: #{place.coordenadasLugar}
