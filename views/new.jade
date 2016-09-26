@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-xs-12.col-md-12
+        h1.text-center Bienvenido #{user.givenName}
+        .panel.panel-default
+          .panel-body
+            p.text-center Opciones de #{title}
+            form(method='POST', action='/dashboard/new')
+              .form-group
+                label(for='nombreLugar') Nombre punto de interes
+                input#nombreLugar.form-control(type='text', placeholder='Nombre punto de interes', name='nombreLugar')
+              .form-group
+                label(for='descLugar') Descripción del punto de interes
+                input#descLugar.form-control(type='textarea', placeholder='Descripción del punto de interes', name='descLugar')
+              .form-group
+                label(for='fotoLugar') Fotografía del punto de interes
+                input#fotoLugar(type='file')
+                p.help-block(style='font-size:16px;') No es necesario una fotografia, puede editarse despues.
+              .checkbox
+                label
+                  input(type='checkbox')
+                  |  Lugar activo?
+              button.btn.btn-default(type='submit') Guardar

@@ -4,8 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var stormpath = require('express-stormpath');
 
 var routes = require('./routes/index');
+var dashboard = require('./routes/dashboard');
+//var events = require('./routes/events');
 var users = require('./routes/users');
 
 var app = express();
@@ -21,8 +24,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(stormpath.init(app, {
+  apiKey: {
+    id: '4S2IAJL6JW7Q0Q0RI53ZFS6MZ',
+    secret: 'Rel3I3HG+OTwy3IJkELu72DJZMJ2fK+BUEBcSdsrkaM'
+  },
+  application: {
+    href: `https://api.stormpath.com/v1/applications/34LCPdxCuZvZ896UP9kAQO`
+  }
+}));
 app.use('/', routes);
+app.use('/dashboard', dashboard);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -57,4 +69,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(80)
+app.on('stormpath.ready',function(){
+  console.log('Estamos corriendo...!')
+})
 module.exports = app;

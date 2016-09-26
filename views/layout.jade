@@ -2,6 +2,13 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Caveat|Roboto|Cantarell')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    nav.navbar.navbar-default
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='/')
+            img.img-rounded.col-xs-12.col-sm-7.col-md-7.col-lg-7(alt='Logo Tampico', src='/img/logo.png')
     block content

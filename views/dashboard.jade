@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-xs-12.col-md-12
+        h1.text-center Bienvenido #{user.givenName}
+        .panel.panel-default
+          .panel-body
+            p.text-center Opciones de Administrador
+            a(href='/dashboard/new').btn.col-md-1.col-md-offset-2 Nuevo Evento
+            a(href='/dashboard/events').btn.col-md-1.col-md-offset-6 Ver Eventos
