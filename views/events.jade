@@ -21,4 +21,5 @@ block content
               p Descripcion: #{place.descLugar}
               p Historia: #{place.historiaLugar}
               p Foto: #[img(src='/#{place.fotoLugar}')]
-              p Coordernadas: #{place.coordenadasLugar}
+              p Coordernadas: #{place.latitudLugar},#{place.longitudLugar}
+              a.pull-right(href='/dashboard/events/#{place._id}',style='margin-top:-30px;') Ver JSON

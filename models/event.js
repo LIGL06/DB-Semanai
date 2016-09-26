@@ -20,7 +20,8 @@ var place_schema = new Schema({
   tipicoLugar: String,
   fotoLugar: String,
   videoLugar: String,
-  coordenadasLugar: String,
+  latitudLugar: String,
+  longitudLugar: String,
   estrellasLugar: {type: Number, min:[1,"Debe ser mayor a 1"],max:[5,"Debe ser menor a 5"]}
 })
 

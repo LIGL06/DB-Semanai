@@ -23,7 +23,7 @@ router.get('/events',stormpath.loginRequired,function(req, res, next) {
   })
 });
 
-router.get('/events/:id', stormpath.loginRequired,function(req, res, next){
+router.get('/events/:id',function(req, res, next){
   Place.findOne({_id:req.params.id}, function(err,doc){
     if (err) {
       res.send(err)
@@ -43,7 +43,8 @@ router.post('/new',stormpath.loginRequired,upload.single('fotoLugar'),function(r
     subnombreLugar: req.body.subnombreLugar,
     descLugar: req.body.descLugar,
     historiaLugar: req.body.historiaLugar,
-    coordenadasLugar: req.body.coordenadasLugar,
+    latitudLugar: req.body.latitudLugar,
+    longitudLugar: req.body.longitudLugar,
   })
   if (req.files) {
     fotoLugar: req.file.path
