@@ -21,4 +21,14 @@ router.get('/',function(req, res, next) {
   })
 });
 
+router.get('/:id',function(req, res, next){
+  Place.findOne({_id:req.params.id}, function(err,doc){
+    if (err) {
+      res.send(err)
+    }
+    res.send(doc)
+  })
+})
+
+
 module.exports = router;

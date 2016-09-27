@@ -1,5 +1,6 @@
 var express = require('express');
 var stormpath = require('express-stormpath');
+var cloudinary = require('cloudinary');
 var mongoose = require('mongoose');
 var multer = require('multer');
 var methodOverride = require('method-override')
@@ -7,6 +8,11 @@ var qr = require('qr-image');
 var storage = multer.diskStorage({destination: 'public/uploads/',filename: function(req,file,cb){
   cb(null, Date.now()+'.jpg')
 }});
+cloudinary.config({
+  cloud_name: 'hammock-software',
+  api_key: '836918743132241',
+  api_secret: '0QwMCzJc_eW-IIuRAzkTHDoetwc'
+})
 var upload = multer({storage:storage})
 var Place = require('../models/event').Place;
 var router = express.Router();
@@ -51,7 +57,7 @@ router.get('/new',stormpath.loginRequired,function(req, res, next) {
   res.render('new', { title: 'Panel de nuevo punto de interes' });
 });
 
-router.post('/new',stormpath.loginRequired,upload.single('fotoLugar'),function(req, res, next){
+router.post('/new',stormpath.loginRequired,function(req, res, next){
   var place = new Place({
     idLugar: req.body.idLugar,
     nombreLugar: req.body.nombreLugar,
@@ -62,17 +68,18 @@ router.post('/new',stormpath.loginRequired,upload.single('fotoLugar'),function(r
     longitudLugar: req.body.longitudLugar,
   })
   if (req.files) {
-    fotoLugar: req.file.path
+    res.send(req.file.fotoLugar)
+    // cloudinary.uploader.upload(req.file.fotoLugar)
   }else {
-    fotoLugar: 'sample.png'
+
   }
-  place.save().then(function(){
-    res.redirect('/dashboard/events')
-  }, function(error){
-    if (error) {
-      res.send('¡Error!')
-    }
-  })
+  // place.save().then(function(){
+  //   res.redirect('/dashboard/events')
+  // }, function(error){
+  //   if (error) {
+  //     res.send('¡Error!')
+  //   }
+  // })
 })
 
 router.get('/edit/:id',stormpath.loginRequired,function(req, res, next){
