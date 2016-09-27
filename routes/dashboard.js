@@ -2,7 +2,8 @@ var express = require('express');
 var stormpath = require('express-stormpath');
 var mongoose = require('mongoose');
 var multer = require('multer');
-var qrcode = require('node-qrcode');
+var methodOverride = require('method-override')
+var qr = require('qr-image');
 var storage = multer.diskStorage({destination: 'public/uploads/',filename: function(req,file,cb){
   cb(null, Date.now()+'.jpg')
 }});
@@ -35,18 +36,16 @@ router.get('/events/:id',function(req, res, next){
 
 router.get('/qr/:id',function(req, res, next){
   Place.findOne({_id:req.params.id}, function(err,doc){
-    qrcode({
-      text: doc.descLugar,
-      size: 200,
-      qrcodepath: 'public/qr/qrcode.png',
-      browser: 'chrome'
-    }).then(function(qrcodepath){
-      console.log(qrcodepath)
-    })
-    res.redirect('/dashboard/events')
+    var Buffer = 'Descripcion: '+doc.descLugar+' Historia: '+doc.historiaLugar
+    if (err) {
+      res.redirect('/dashboard/events')
+    }else {
+      var code = qr.image(Buffer,{type: 'svg'})
+      res.type('svg')
+      code.pipe(res)
+    }
   })
 })
-
 
 router.get('/new',stormpath.loginRequired,function(req, res, next) {
   res.render('new', { title: 'Panel de nuevo punto de interes' });
@@ -76,12 +75,32 @@ router.post('/new',stormpath.loginRequired,upload.single('fotoLugar'),function(r
   })
 })
 
-router.get('/edit/:id',stormpath.loginRequired,function(req,res,next){
+router.get('/edit/:id',stormpath.loginRequired,function(req, res, next){
   Place.findOne({_id:req.params.id}, function(err,place){
     if (err) {
       res.send(err)
     }else {
-      res.render('edit', {place:place, title: 'Editar lugar de interes'})
+      res.render('edit', {place:place, title: 'Eliminar lugar de interes'})
+    }
+  })
+})
+
+router.get('/delete/:id',stormpath.loginRequired,function(req, res, next){
+  Place.findOne({_id:req.params.id}, function(err,place){
+    if (err) {
+      res.send(err)
+    }else {
+      res.render('delete', {place:place, title: 'Editar lugar de interes'})
+    }
+  })
+})
+
+router.delete('/delete/:id',stormpath.loginRequired,function(req, res, next){
+  Place.findOneAndRemove({"_id":req.params.id}, function(err){
+    if (err) {
+      res.send(err)
+    }else {
+      res.redirect('/dashboard/events')
     }
   })
 })

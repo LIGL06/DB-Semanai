@@ -6,12 +6,6 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "@angular/common": "^2.0.1",
-    "@angular/compiler": "^2.0.1",
-    "@angular/core": "^2.0.1",
-    "@angular/platform-browser": "^2.0.1",
-    "@angular/platform-browser-dynamic": "^2.0.1",
-    "angular2-google-maps": "^0.15.0",
     "body-parser": "~1.15.1",
     "cloudinary": "^1.4.3",
     "cookie-parser": "~1.4.3",
@@ -19,11 +13,10 @@
     "express": "~4.13.4",
     "express-stormpath": "^3.1.5",
     "jade": "~1.11.0",
+    "method-override": "^2.3.6",
     "mongoose": "^4.6.1",
     "morgan": "~1.7.0",
     "multer": "^1.2.0",
-    "node-qrcode": "0.0.4",
-    "qr.js": "0.0.0",
     "rxjs": "^5.0.0-beta.12",
     "serve-favicon": "~2.3.0",
     "zone.js": "^0.6.25"

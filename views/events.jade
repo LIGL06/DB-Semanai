@@ -1,4 +1,4 @@
-extends layout
+extends loggedlayout
 //idLugar: Number,
 //nombreLugar: String,
 //subnombreLugar: String,
@@ -27,4 +27,4 @@ block content
                   td #{place.idLugar}
                   td #[a(href='/dashboard/events/#{place._id}', target='_blank') Ver JSON]
                   td #{place.caterogiaLugar}
-                  td #[a(href='/dashboard/qr/#{place._id}') QR] #[a(href='/dashboard/edit/#{place._id}') Editar] #[a(href='/dashboard/delete/#{place._id}') Eliminar]
+                  td #[a(href='/dashboard/qr/#{place._id}', target='_blank') QR] #[a(href='/dashboard/edit/#{place._id}') Editar] #[a(href='/dashboard/delete/#{place._id}') Eliminar]

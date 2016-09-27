@@ -1,0 +1,23 @@
+extends loggedlayout
+//idLugar: Number,
+//nombreLugar: String,
+//subnombreLugar: String,
+//descLugar: String,
+//historiaLugar: String,
+//fotoLugar: String,
+//coordenadasLugar:String,
+
+block content
+  .container
+    .row
+      .col-xs-12.col-md-12
+        h1.text-center Bienvenido #{user.givenName}
+        .panel.panel-default
+          .panel-body
+            p.text-center(style='color:red;') Eliminar #[strong #{place.nombreLugar}]
+            p Eliminar el folio #[b #{place._id}?]
+            p Tipo de Lugar: #[b #{place.categoriaLugar}]
+            p Descripción de Lugar: #[b #{place.descLugar}]
+            form(method='POST', action='/dashboard/delete/#{place._id}?_method=delete')
+              .form-group.col-md-1
+                button.btn.btn-info(type='submit') Eliminar
