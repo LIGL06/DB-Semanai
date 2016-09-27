@@ -13,6 +13,8 @@ var router = express.Router();
 /* GET home page. */
 router.get('/',function(req, res, next) {
   Place.find(function(err,docs){
+    res.setHeader('Acess-Control-Allow-Methods','GET,POST,DELETE,UPDATE')
+    res.setHeader('Acess-Control-Allow-Headers','X-Requested-with,content-type')
     res.send(docs)
   })
 });
