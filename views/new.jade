@@ -4,7 +4,7 @@ extends loggedlayout
 //subnombreLugar: String,
 //descLugar: String,
 //historiaLugar: String,
-//fotoLugar: String,
+//bgLugar: String,
 //coordenadasLugar:String,
 
 block content
@@ -40,7 +40,7 @@ block content
                 input#longitudLugar.form-control(type='text', placeholder='Coordenadas - Longitud', name='longitudLugar')
               .form-group.col-md-12
                 label(for='fotoLugar') Fotografía del punto de interes
-                input#fotoLugar(type='file', name='fotoLugar')
+                input#bgLugar(type='file', name='bgLugar')
                 p.help-block(style='font-size:16px;') No es necesario una fotografia, puede editarse despues.
               .form-group.col-md-1
                 button.btn.btn-info(type='submit') Guardar

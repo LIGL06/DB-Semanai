@@ -19,7 +19,7 @@ var place_schema = new Schema({
   descLugar: String,
   historiaLugar: String,
   tipicoLugar: String,
-  fotoLugar: String,
+  bgLugar: String,
   videoLugar: String,
   latitudLugar: String,
   longitudLugar: String,

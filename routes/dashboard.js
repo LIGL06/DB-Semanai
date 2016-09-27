@@ -57,7 +57,7 @@ router.get('/new',stormpath.loginRequired,function(req, res, next) {
   res.render('new', { title: 'Panel de nuevo punto de interes' });
 });
 
-router.post('/new',stormpath.loginRequired,function(req, res, next){
+router.post('/new',stormpath.loginRequired,upload.single('bgLugar'),function(req, res, next){
   var place = new Place({
     idLugar: req.body.idLugar,
     nombreLugar: req.body.nombreLugar,
@@ -67,19 +67,21 @@ router.post('/new',stormpath.loginRequired,function(req, res, next){
     latitudLugar: req.body.latitudLugar,
     longitudLugar: req.body.longitudLugar,
   })
-  if (req.files) {
-    res.send(req.file.fotoLugar)
-    // cloudinary.uploader.upload(req.file.fotoLugar)
+  if (req.file) {
+    cloudinary.uploader.upload(req.file.path,function(result){
+      place.bgLugar = result.url
+      place.save().then(function(){
+        res.redirect('/dashboard/events')
+      }, function(error){
+        if (error) {
+          res.send('¡Error!')
+        }
+      })
+    })
   }else {
-
+    res.redirect('/dashboard/new')
   }
-  // place.save().then(function(){
-  //   res.redirect('/dashboard/events')
-  // }, function(error){
-  //   if (error) {
-  //     res.send('¡Error!')
-  //   }
-  // })
+
 })
 
 router.get('/edit/:id',stormpath.loginRequired,function(req, res, next){
