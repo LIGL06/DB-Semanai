@@ -67,7 +67,7 @@ router.post('/new',stormpath.loginRequired,upload.single('fotoLugar'),function(r
     fotoLugar: 'sample.png'
   }
   place.save().then(function(){
-    res.send('¡Éxito!')
+    res.redirect('/dashboard/events')
   }, function(error){
     if (error) {
       res.send('¡Error!')
