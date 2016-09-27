@@ -1,5 +1,4 @@
 var express = require('express');
-var stormpath = require('express-stormpath');
 var mongoose = require('mongoose');
 var multer = require('multer');
 var methodOverride = require('method-override')
@@ -12,7 +11,7 @@ var Place = require('../models/event').Place;
 var router = express.Router();
 
 /* GET home page. */
-router.get('/',stormpath.loginRequired,function(req, res, next) {
+router.get('/',function(req, res, next) {
   Place.find(function(err,docs){
     res.send(docs)
   })
