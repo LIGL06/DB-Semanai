@@ -15,6 +15,7 @@ var place_schema = new Schema({
   idLugar: Number,
   nombreLugar: String,
   subnombreLugar: String,
+  caterogiaLugar: String,
   descLugar: String,
   historiaLugar: String,
   tipicoLugar: String,
@@ -42,6 +43,15 @@ email: {
 var comments = new Schema({
   _creator: {type: Number, ref: 'User'},
   title: String,
+})
+
+var cat_schema = new Schema({
+
+})
+
+var foto_schema = new Schema({
+  idFoto: Number,
+  idLugar: Number,
 })
 
 var User = mongoose.model('User',user_schema);

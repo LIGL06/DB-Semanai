@@ -22,6 +22,8 @@
     "mongoose": "^4.6.1",
     "morgan": "~1.7.0",
     "multer": "^1.2.0",
+    "node-qrcode": "0.0.4",
+    "qr.js": "0.0.0",
     "rxjs": "^5.0.0-beta.12",
     "serve-favicon": "~2.3.0",
     "zone.js": "^0.6.25"

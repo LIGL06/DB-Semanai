@@ -1,6 +1,9 @@
 a {color: #00B7FF;}
 body{background:#fff;padding:20px;font-size:24px;font-family: 'Cantarell', sans-serif;}
 button{font-size:22px; padding: 5px;}
+ul li a {font-size:14px;color:white!important;margin-top:-5%;}
+.table-responsive{font-size: 16px;}
+.responsiva{max-width:90%;margin-top: -2%;}
 .cavaet{font-family: 'Caveat', cursive;}
 .roboto{font-family: 'Roboto', sans-serif;}
 .navbar{background-color:#000;height: 90px;}

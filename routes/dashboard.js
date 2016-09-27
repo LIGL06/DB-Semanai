@@ -2,6 +2,7 @@ var express = require('express');
 var stormpath = require('express-stormpath');
 var mongoose = require('mongoose');
 var multer = require('multer');
+var qrcode = require('node-qrcode');
 var storage = multer.diskStorage({destination: 'public/uploads/',filename: function(req,file,cb){
   cb(null, Date.now()+'.jpg')
 }});
@@ -32,6 +33,21 @@ router.get('/events/:id',function(req, res, next){
   })
 })
 
+router.get('/qr/:id',function(req, res, next){
+  Place.findOne({_id:req.params.id}, function(err,doc){
+    qrcode({
+      text: doc.descLugar,
+      size: 200,
+      qrcodepath: 'public/qr/qrcode.png',
+      browser: 'chrome'
+    }).then(function(qrcodepath){
+      console.log(qrcodepath)
+    })
+    res.redirect('/dashboard/events')
+  })
+})
+
+
 router.get('/new',stormpath.loginRequired,function(req, res, next) {
   res.render('new', { title: 'Panel de nuevo punto de interes' });
 });
@@ -56,6 +72,16 @@ router.post('/new',stormpath.loginRequired,upload.single('fotoLugar'),function(r
   }, function(error){
     if (error) {
       res.send('¡Error!')
+    }
+  })
+})
+
+router.get('/edit/:id',stormpath.loginRequired,function(req,res,next){
+  Place.findOne({_id:req.params.id}, function(err,place){
+    if (err) {
+      res.send(err)
+    }else {
+      res.render('edit', {place:place, title: 'Editar lugar de interes'})
     }
   })
 })

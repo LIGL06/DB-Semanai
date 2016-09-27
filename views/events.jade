@@ -13,13 +13,18 @@ block content
         h1.text-center Bienvenido a #{title}
         .panel.panel-default
           .panel-body
-            each place in places
-              hr
-              p ID: #{place._id}
-              p Nombre: #{place.nombreLugar}
-              p SubNombre: #{place.subnombreLugar}
-              p Descripcion: #{place.descLugar}
-              p Historia: #{place.historiaLugar}
-              p Foto: #[img(src='/#{place.fotoLugar}')]
-              p Coordernadas: #{place.latitudLugar},#{place.longitudLugar}
-              a.pull-right(href='/dashboard/events/#{place._id}',style='margin-top:-30px;') Ver JSON
+            table.table.table-stripped.table-responsive.text-left
+              thead
+                tr
+                  th Nombre
+                  th Objeto
+                  th JSON
+                  th Categoría
+                  th Acciones
+              each place in places
+                tr
+                  td #{place.nombreLugar}
+                  td #{place.idLugar}
+                  td #[a(href='/dashboard/events/#{place._id}', target='_blank') Ver JSON]
+                  td #{place.caterogiaLugar}
+                  td #[a(href='/dashboard/qr/#{place._id}') QR] #[a(href='/dashboard/edit/#{place._id}') Editar] #[a(href='/dashboard/delete/#{place._id}') Eliminar]

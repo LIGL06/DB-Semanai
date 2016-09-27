@@ -31,11 +31,17 @@ app.use(stormpath.init(app, {
   },
   application: {
     href: `https://api.stormpath.com/v1/applications/34LCPdxCuZvZ896UP9kAQO`
+  },
+  web: {
+    login:{
+      enabled: true,
+      nextUri: '/dashboard'
+    }
   }
 }));
 app.use('/', routes);
 app.use('/dashboard', dashboard);
-app.use('/users', users);
+//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
