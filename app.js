@@ -11,6 +11,7 @@ var dashboard = require('./routes/dashboard');
 var api = require('./routes/api');
 //var events = require('./routes/events');
 var users = require('./routes/users');
+var port = process.env.PORT||80;
 
 var app = express();
 
@@ -77,7 +78,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(80)
+app.listen(port)
 app.on('stormpath.ready',function(){
   console.log('Estamos corriendo...!')
 })
