@@ -11,7 +11,7 @@ var dashboard = require('./routes/dashboard');
 var api = require('./routes/api');
 //var events = require('./routes/events');
 var users = require('./routes/users');
-var port = process.env.PORT||80;
+var port = process.env.PORT||8000;
 
 var app = express();
 

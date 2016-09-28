@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var mongoUrl = 'mongodb://localhost:27017/semanai'||'mongodb://semanai:semanai@ds041556.mlab.com:41556/heroku_s9qzqzdg'
-
+var mongoUrl = 'mongodb://prueba:prueba@ds041556.mlab.com:41556/heroku_s9qzqzdg'
 mongoose.connect(mongoUrl, function(error){
   if (error) {
     throw error;
