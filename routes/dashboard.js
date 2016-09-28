@@ -84,6 +84,14 @@ router.post('/new',stormpath.loginRequired,upload.single('bgLugar'),function(req
 
 })
 
+router.get('/image',stormpath.loginRequired,function(req, res, next){
+  res.render('images',{title: 'Panel de Imagenes'})
+})
+
+router.get('/image/new',stormpath.loginRequired,function(req, res, next){
+  res.render('newimage',{title: 'Panel de Imagenes'})
+})
+
 router.get('/edit/:id',stormpath.loginRequired,function(req, res, next){
   Place.findOne({_id:req.params.id}, function(err,place){
     if (err) {

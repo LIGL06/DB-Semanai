@@ -46,6 +46,7 @@ html(lang='es')
       if user
         #navbar1.collapse.navbar-collapse
           ul.nav.navbar-nav.navbar-right
+            li #[a Bienvenido #{user.givenName}]
             li #[a(href='/dashboard/events') Puntos de interes]
       if !user
           #navbar1.collapse.navbar-collapse

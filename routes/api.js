@@ -34,5 +34,23 @@ router.get('/:id',function(req, res, next){
   })
 })
 
+router.get('/name/:id',function(req, res, next){
+  Place.findOne({nombreLugar:req.params.id}, function(err,doc){
+    if (err) {
+      res.send(err)
+    }
+    res.setHeader('Access-Control-Allow-Origin','http://localhost:8100')
+    res.setHeader('Access-Control-Allow-Methods','GET,POST,DELETE,UPDATE')
+    res.setHeader('Access-Control-Allow-Headers','X-Requested-with,content-type')
+    res.setHeader('Access-Control-Allow-Cerenditials',false)
+    res.send(doc)
+  })
+})
+
+
+router.get('/images',function(req, res,next){
+
+})
+
 
 module.exports = router;

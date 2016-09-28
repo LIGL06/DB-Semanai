@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var mongoUrl = 'mongodb://prueba:prueba@ds041556.mlab.com:41556/heroku_s9qzqzdg'
+var mongoUrl = 'mongodb://localhost/semanai'
 mongoose.connect(mongoUrl, function(error){
   if (error) {
     throw error;
@@ -50,7 +50,7 @@ var cat_schema = new Schema({
 
 var foto_schema = new Schema({
   idFoto: Number,
-  idLugar: Number,
+  idLugar:{type:String, ref:'Place'}
 })
 
 var User = mongoose.model('User',user_schema);

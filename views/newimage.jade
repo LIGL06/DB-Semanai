@@ -1,0 +1,31 @@
+extends loggedlayout
+//idLugar: Number,
+//nombreLugar: String,
+//subnombreLugar: String,
+//descLugar: String,
+//historiaLugar: String,
+//bgLugar: String,
+//coordenadasLugar:String,
+
+block content
+  .container
+    .row
+      .col-xs-12.col-md-12
+        .panel.panel-default
+          .panel-body
+            p.text-center #{title}
+            form(method='POST', action='/dashboard/image/new', enctype='multipart/form-data')
+              .form-group.col-md-6
+                label(for='_idLugar') _id de Lugar #[a(href='/api', target='_blank') Ver _id]
+                input#_idLugar.form-control(type='String', placeholder='_id de punto de interes', name='_idLugar')
+              .form-group.col-md-12
+                label(for='fotoLugar') Fotografía 1º del punto de interes
+                input#fotoLugar(type='file', name='fotoLugar')
+              .form-group.col-md-12
+                label(for='fotoLugar') Fotografía 2º del punto de interes
+                input#fotoLugar(type='file', name='fotoLugar')
+              .form-group.col-md-12
+                label(for='fotoLugar') Fotografía 3º del punto de interes
+                input#fotoLugar(type='file', name='fotoLugar')
+              .form-group.col-md-1
+                button.btn.btn-info(type='submit') Guardar

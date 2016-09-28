@@ -6,7 +6,7 @@ extends loggedlayout
 //historiaLugar: String,
 //bgLugar: String,
 //coordenadasLugar:String,
-
+//AIzaSyC0M8y4m44iM-d5Uflk1JXfF-ZvDumWaAY
 block content
   .container
     .row
@@ -33,7 +33,7 @@ block content
                 input#historiaLugar.form-control(type='text', placeholder='Historia', name='historiaLugar')
               .form-group.col-md-6
                 label(for='latitudLugar') Latitud del punto de interes
-                //iframe(name='latitudLugar', src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d14756.6614988593!2d-97.89938625!3d22.385122250000002!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2smx!4v1474909418479" width="800" height="300" frameborder="0" style="border:0" allowfullscreen)
+                #map(style='height:600px;')
                 input#latitudLugar.form-control(type='text', placeholder='Coordenadas - Latitud', name='latitudLugar')
               .form-group.col-md-6
                 label(for='longitudLugar') Longitud del punto de interes
@@ -44,3 +44,22 @@ block content
                 p.help-block(style='font-size:16px;') No es necesario una fotografia, puede editarse despues.
               .form-group.col-md-1
                 button.btn.btn-info(type='submit') Guardar
+  script.
+    function initMap() {
+        var myLatLng = {lat: 22.2158187, lng: -97.8407089};
+
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: myLatLng,
+          scrollwheel: false,
+          zoom: 4
+        });
+
+        // Create a marker and set its position.
+        var marker = new google.maps.Marker({
+          map: map,
+          position: myLatLng,
+          title: 'Hello World!'
+        });
+      }
+  script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC0M8y4m44iM-d5Uflk1JXfF-ZvDumWaAY&callback=initMap')

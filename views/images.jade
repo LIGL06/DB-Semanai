@@ -1,0 +1,12 @@
+extends loggedlayout
+
+block content
+  .container
+    .row
+      .col-xs-12.col-md-12
+        h1.text-center Bienvenido #{user.givenName}
+        .panel.panel-default
+          .panel-body
+            p.text-center Opciones de Imagenes
+            a(href='/dashboard/image/new').btn.col-md-6 Nueva imagen
+            a(href='/dashboard/images').btn.col-md-6 Ver imagenes
