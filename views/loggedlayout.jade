@@ -1,8 +1,4 @@
 doctype html
-//seguridadprivadag83.com.mx**144.90
-//g83seguridadprivada.com.mx**144.90
-//g83.com.mx**144.90**182.90
-
 html(lang='es')
   head
     meta(charset='UTF-8')
@@ -32,6 +28,9 @@ html(lang='es')
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Caveat|Roboto|Cantarell')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='https://code.jquery.com/jquery-1.12.4.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzLwf3tEg1qjAr0U4n8bUbmvh8FZK2JeM&callback=initMap" async defer)
   body
     nav.navbar.navbar-default
       .container-fluid
@@ -53,5 +52,4 @@ html(lang='es')
             ul.nav.navbar-nav.navbar-right
               li #[a(href='/login') Iniciar Sesión]
     block content
-    script(src='https://code.jquery.com/jquery-1.12.4.min.js')
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    

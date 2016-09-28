@@ -6,7 +6,7 @@ extends loggedlayout
 //historiaLugar: String,
 //bgLugar: String,
 //coordenadasLugar:String,
-//AIzaSyC0M8y4m44iM-d5Uflk1JXfF-ZvDumWaAY
+//AIzaSyCzLwf3tEg1qjAr0U4n8bUbmvh8FZK2JeM
 block content
   .container
     .row
@@ -15,7 +15,7 @@ block content
         .panel.panel-default
           .panel-body
             p.text-center Opciones de #{title}
-            form(method='POST', action='/dashboard/new', enctype='multipart/form-data')
+            form#new(method='POST', action='/dashboard/new', enctype='multipart/form-data')
               .form-group.col-md-6
                 label(for='idLugar') Numero
                 input#idLugar.form-control(type='number', placeholder='Numero de punto de interes', name='idLugar')
@@ -31,13 +31,12 @@ block content
               .form-group.col-md-9
                 label(for='historiaLugar') Historia de punto de interes
                 input#historiaLugar.form-control(type='text', placeholder='Historia', name='historiaLugar')
+              #map.col-md-6(style='height:300px;')
               .form-group.col-md-6
                 label(for='latitudLugar') Latitud del punto de interes
-                #map(style='height:600px;')
-                input#latitudLugar.form-control(type='text', placeholder='Coordenadas - Latitud', name='latitudLugar')
-              .form-group.col-md-6
+                input#latitudLugar.form-control(type='text', placeholder='Coordenadas - Latitud', name='latitudLugar', value='')
                 label(for='longitudLugar') Longitud del punto de interes
-                input#longitudLugar.form-control(type='text', placeholder='Coordenadas - Longitud', name='longitudLugar')
+                input#longitudLugar.form-control(type='text', placeholder='Coordenadas - Longitud', name='longitudLugar', value='')
               .form-group.col-md-12
                 label(for='fotoLugar') Fotografía del punto de interes
                 input#bgLugar(type='file', name='bgLugar')
@@ -45,21 +44,23 @@ block content
               .form-group.col-md-1
                 button.btn.btn-info(type='submit') Guardar
   script.
-    function initMap() {
-        var myLatLng = {lat: 22.2158187, lng: -97.8407089};
-
-        // Create a map object and specify the DOM element for display.
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: myLatLng,
-          scrollwheel: false,
-          zoom: 4
-        });
-
-        // Create a marker and set its position.
-        var marker = new google.maps.Marker({
+    window.onload = function() {
+      var latlng = new google.maps.LatLng(22.2158187, -97.8407089);
+      var map = new google.maps.Map(document.getElementById('map'), {
+          center: latlng,
+          zoom: 11,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+      var marker = new google.maps.Marker({
+          position: latlng,
           map: map,
-          position: myLatLng,
-          title: 'Hello World!'
-        });
-      }
-  script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC0M8y4m44iM-d5Uflk1JXfF-ZvDumWaAY&callback=initMap')
+          title: 'Set lat/lon values for this property',
+          draggable: true
+      });
+      google.maps.event.addListener(marker, 'dragend', function(a) {
+          console.log(a);
+          var div = document.createElement('div');
+          div.innerHTML = a.latLng.lat().toFixed(4) + ', ' + a.latLng.lng().toFixed(4);
+          document.getElementsByTagName('body')[0].appendChild(div);
+      });
+    };
