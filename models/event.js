@@ -22,8 +22,8 @@ var place_schema = new Schema({
   videoLugar: String,
   latitudLugar: String,
   longitudLugar: String,
-  fotos: [{type:String}],
-  videos: [{type:String}],
+  fotos: [{}],
+  videos: [{}],
   estrellasLugar: {type: Number, min:[1,"Debe ser mayor a 1"],max:[5,"Debe ser menor a 5"]}
 })
 

@@ -57,16 +57,20 @@ router.get('/new',stormpath.loginRequired,function(req, res, next) {
   res.render('new', { title: 'Panel de nuevo punto de interes' });
 });
 
-router.post('/new',stormpath.loginRequired,upload.array(),function(req, res, next){
-  // var place = new Place({
-  //   idLugar: req.body.idLugar,
-  //   nombreLugar: req.body.nombreLugar,
-  //   subnombreLugar: req.body.subnombreLugar,
-  //   descLugar: req.body.descLugar,
-  //   historiaLugar: req.body.historiaLugar,
-  //   latitudLugar: req.body.latitudLugar,
-  //   longitudLugar: req.body.longitudLugar,
-  // })
+router.post('/new',upload.array('fotoLugar',12),function(req, res, next){
+  var place = new Place({
+    idLugar: req.body.idLugar,
+    nombreLugar: req.body.nombreLugar,
+    subnombreLugar: req.body.subnombreLugar,
+    descLugar: req.body.descLugar,
+    historiaLugar: req.body.historiaLugar,
+    latitudLugar: req.body.latitudLugar,
+    longitudLugar: req.body.longitudLugar,
+  })
+  place.fotos[0] = req.files[0].path;
+  place.fotos[1] = req.files[1].path;
+  place.fotos[2] = req.files[2].path;
+  res.send(place)
   // if (req.file) {
   //   cloudinary.uploader.upload(req.file.path,function(result){
   //     place.bgLugar = result.url
@@ -81,7 +85,6 @@ router.post('/new',stormpath.loginRequired,upload.array(),function(req, res, nex
   // }else {
   //   res.redirect('/dashboard/new')
   // }
-  res.send(req.body)
 })
 
 router.get('/image',stormpath.loginRequired,function(req, res, next){

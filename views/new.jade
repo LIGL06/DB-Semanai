@@ -31,16 +31,15 @@ block content
                 input#longitudLugar.form-control(type='text',value='', placeholder='Longitud de lugar de interes', name='longitudLugar')
               .form-group.col-md-12
                 label(for='fotoLugar') Fondo de lugar
-                input#fotoLugar(type='file')
+                input#fotoLugar(type='file',name='fotoLugar')
               .form-group.col-md-6
                 label(for='fotoLugar') Foto de lugar
-                input#fotoLugar(type='file')
+                input#fotoLugar(type='file',name='fotoLugar')
               .form-group.col-md-6
                 label(for='fotoLugar') Foto de lugar
-                input#fotoLugar(type='file')
+                input#fotoLugar(type='file',name='fotoLugar')
               .form-group.col-md-1
                 input.btn.btn-info(type='submit', value='Guardar')
   script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzLwf3tEg1qjAr0U4n8bUbmvh8FZK2JeM&callback=initMap" async defer)              button.btn.btn-info(type='submit') Guardar
   script(src='/js/upload.min.js')
   script(src='/js/map.js')
-  script(src='/js/angular-uploader.js')
