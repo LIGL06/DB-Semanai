@@ -1,5 +1,5 @@
 doctype html
-html(lang='es')
+html(lang='es',ng-app='app')
   head
     meta(charset='UTF-8')
     meta(property='og:title', content='Vive Tampico - Semanai')
@@ -30,7 +30,6 @@ html(lang='es')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src='https://code.jquery.com/jquery-1.12.4.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
-    script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzLwf3tEg1qjAr0U4n8bUbmvh8FZK2JeM&callback=initMap" async defer)
   body
     nav.navbar.navbar-default
       .container-fluid
@@ -52,4 +51,3 @@ html(lang='es')
             ul.nav.navbar-nav.navbar-right
               li #[a(href='/login') Iniciar Sesión]
     block content
-    

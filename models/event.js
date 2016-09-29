@@ -22,6 +22,8 @@ var place_schema = new Schema({
   videoLugar: String,
   latitudLugar: String,
   longitudLugar: String,
+  fotos: [{type:String}],
+  videos: [{type:String}],
   estrellasLugar: {type: Number, min:[1,"Debe ser mayor a 1"],max:[5,"Debe ser menor a 5"]}
 })
 
@@ -51,6 +53,10 @@ var cat_schema = new Schema({
 var foto_schema = new Schema({
   idFoto: Number,
   idLugar:{type:String, ref:'Place'}
+})
+
+var qr_chema = new Schema({
+
 })
 
 var User = mongoose.model('User',user_schema);

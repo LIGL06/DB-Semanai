@@ -58,30 +58,30 @@ router.get('/new',stormpath.loginRequired,function(req, res, next) {
 });
 
 router.post('/new',stormpath.loginRequired,upload.single('bgLugar'),function(req, res, next){
-  var place = new Place({
-    idLugar: req.body.idLugar,
-    nombreLugar: req.body.nombreLugar,
-    subnombreLugar: req.body.subnombreLugar,
-    descLugar: req.body.descLugar,
-    historiaLugar: req.body.historiaLugar,
-    latitudLugar: req.body.latitudLugar,
-    longitudLugar: req.body.longitudLugar,
-  })
-  if (req.file) {
-    cloudinary.uploader.upload(req.file.path,function(result){
-      place.bgLugar = result.url
-      place.save().then(function(){
-        res.redirect('/dashboard/events')
-      }, function(error){
-        if (error) {
-          res.send('¡Error!')
-        }
-      })
-    })
-  }else {
-    res.redirect('/dashboard/new')
-  }
-
+  // var place = new Place({
+  //   idLugar: req.body.idLugar,
+  //   nombreLugar: req.body.nombreLugar,
+  //   subnombreLugar: req.body.subnombreLugar,
+  //   descLugar: req.body.descLugar,
+  //   historiaLugar: req.body.historiaLugar,
+  //   latitudLugar: req.body.latitudLugar,
+  //   longitudLugar: req.body.longitudLugar,
+  // })
+  // if (req.file) {
+  //   cloudinary.uploader.upload(req.file.path,function(result){
+  //     place.bgLugar = result.url
+  //     place.save().then(function(){
+  //       res.redirect('/dashboard/events')
+  //     }, function(error){
+  //       if (error) {
+  //         res.send('¡Error!')
+  //       }
+  //     })
+  //   })
+  // }else {
+  //   res.redirect('/dashboard/new')
+  // }
+  res.send(req.body)
 })
 
 router.get('/image',stormpath.loginRequired,function(req, res, next){
