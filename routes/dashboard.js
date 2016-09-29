@@ -57,7 +57,7 @@ router.get('/new',stormpath.loginRequired,function(req, res, next) {
   res.render('new', { title: 'Panel de nuevo punto de interes' });
 });
 
-router.post('/new',stormpath.loginRequired,upload.single('bgLugar'),function(req, res, next){
+router.post('/new',stormpath.loginRequired,upload.array(),function(req, res, next){
   // var place = new Place({
   //   idLugar: req.body.idLugar,
   //   nombreLugar: req.body.nombreLugar,

@@ -1,17 +1,9 @@
 extends loggedlayout
-//idLugar: Number,
-//nombreLugar: String,
-//subnombreLugar: String,
-//descLugar: String,
-//historiaLugar: String,
-//bgLugar: String,
-//coordenadasLugar:String,
 //AIzaSyCzLwf3tEg1qjAr0U4n8bUbmvh8FZK2JeM
 block content
   .container(ng-style="style")
     .row
       .col-xs-12.col-md-12
-        h1.text-center Bienvenido #{user.givenName}
         .panel.panel-default
           .panel-body
             p.text-center Opciones de #{title}
@@ -38,39 +30,17 @@ block content
                 label(for='longitudLugar') Longitud de lugar de interes
                 input#longitudLugar.form-control(type='text',value='', placeholder='Longitud de lugar de interes', name='longitudLugar')
               .form-group.col-md-12
-                div(flow-init="{target: '/upload'}", flow-files-submitted='$flow.upload()', flow-file-success='$file.msg = $message')
-                  img(flow-img='$flow.files[0]')
-                  input(type='file', flow-btn='')
-                  span.btn(flow-btn='')
-                  table
-                    tr(ng-repeat='file in $flow.files')
-                      td {{$index+1}}
-                      td {{file.name}}
-                      td {{file.msg}}
+                label(for='fotoLugar') Fondo de lugar
+                input#fotoLugar(type='file')
+              .form-group.col-md-6
+                label(for='fotoLugar') Foto de lugar
+                input#fotoLugar(type='file')
+              .form-group.col-md-6
+                label(for='fotoLugar') Foto de lugar
+                input#fotoLugar(type='file')
               .form-group.col-md-1
                 input.btn.btn-info(type='submit', value='Guardar')
-  script(src='/js/angular.min.js')
-  script(src='/js/ng-flow-standalone.min.js')
   script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzLwf3tEg1qjAr0U4n8bUbmvh8FZK2JeM&callback=initMap" async defer)              button.btn.btn-info(type='submit') Guardar
-  script(src='/js/app.js')
-  script.
-    window.onload = function() {
-      var latlng = new google.maps.LatLng(22.2158187, -97.8407089);
-      var map = new google.maps.Map(document.getElementById('map'), {
-          center: latlng,
-          zoom: 11,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-      });
-      var marker = new google.maps.Marker({
-          position: latlng,
-          map: map,
-          title: 'Set lat/lon values for this property',
-          draggable: true
-      });
-      google.maps.event.addListener(marker, 'dragend', function(a) {
-          $(document).ready(function(){
-              $("input#latitudLugar").val(a.latLng.lat());
-              $("input#longitudLugar").val(a.latLng.lng());
-            });
-      });
-    };
+  script(src='/js/upload.min.js')
+  script(src='/js/map.js')
+  script(src='/js/angular-uploader.js')
