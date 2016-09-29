@@ -3,7 +3,7 @@ var stormpath = require('express-stormpath');
 var cloudinary = require('cloudinary');
 var mongoose = require('mongoose');
 var multer = require('multer');
-var methodOverride = require('method-override')
+var methodOverride = require('method-override');
 var qr = require('qr-image');
 var storage = multer.diskStorage({destination: 'public/uploads/',filename: function(req,file,cb){
   cb(null, Date.now()+'.jpg')
@@ -67,24 +67,27 @@ router.post('/new',upload.array('fotoLugar',12),function(req, res, next){
     latitudLugar: req.body.latitudLugar,
     longitudLugar: req.body.longitudLugar,
   })
-  place.fotos[0] = req.files[0].path;
-  place.fotos[1] = req.files[1].path;
-  place.fotos[2] = req.files[2].path;
-  res.send(place)
-  // if (req.file) {
-  //   cloudinary.uploader.upload(req.file.path,function(result){
-  //     place.bgLugar = result.url
-  //     place.save().then(function(){
-  //       res.redirect('/dashboard/events')
-  //     }, function(error){
-  //       if (error) {
-  //         res.send('¡Error!')
-  //       }
-  //     })
-  //   })
-  // }else {
-  //   res.redirect('/dashboard/new')
-  // }
+  // place.save().then(function(){
+  //   res.redirect('/dashboard/events')
+  // }, function(error){
+  //   if (error) {
+  //     res.send('¡Error!')
+  //   }
+  // })
+  if (req.files) {
+    cloudinary.uploader.upload(req.files[0].path,function(result){
+      place.bgLugar = result.url;
+    })
+    cloudinary.uploader.upload(req.files[1].path,function(result){
+      place.fotos[0] = result.url;
+    })
+    cloudinary.uploader.upload(req.files[2].path,function(result){
+      place.fotos[1] = result.url;
+    })
+    res.send(place)
+  }else {
+    res.redirect('/dashboard/new')
+  }
 })
 
 router.get('/image',stormpath.loginRequired,function(req, res, next){

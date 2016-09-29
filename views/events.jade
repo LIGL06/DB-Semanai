@@ -23,7 +23,7 @@ block content
                   th Acciones
               each place in places
                 tr
-                  td #{place.nombreLugar}
+                  td #{place.nombreLugar} #[img(src='#{place.bgLugar}')]
                   td #{place.idLugar}
                   td #[a(href='/dashboard/events/#{place._id}', target='_blank') Ver JSON]
                   td #{place.caterogiaLugar}
