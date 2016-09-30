@@ -92,7 +92,7 @@ router.post('/qr/new',upload.single('imagen'),function(req, res, next){
     nombre: req.body.nombre,
     descripcion: req.body.descripcion,
   })
-  qr.iamgen = req.file.filename;
+  qr.imagen = req.file.filename;
   qr.idRef = qr.id;
   qr.save().then(function(){
     res.redirect('/dashboard/qrpanel')
