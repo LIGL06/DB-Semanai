@@ -87,13 +87,13 @@ router.get('/imagenes/:id',function(req, res, next){
 
 router.post('/new/comment', function(req,res,next){
   var comment = new Comment({
-    idLugar: req.body.idLugar,
-    idUser: req.body.idUser,
-    picUser: req.body.picUser,
-    comment: req.body.comment,
-    rate: req.body.rate,
-    username: req.body.username,
-    date: req.body.date
+    idLugar: req.params.idLugar,
+    idUser: req.params.idUser,
+    picUser: req.params.picUser,
+    comment: req.params.comment,
+    rate: req.params.rate,
+    username: req.params.username,
+    date: req.params.date
   })
   comment.save()
   Comment.find({idLugar:comment.idLugar},function(err,doc){
@@ -112,6 +112,7 @@ router.post('/new/comment', function(req,res,next){
         console.log(resultado)
       }
     })
+    console.log(req)
   })
   res.setHeader('Access-Control-Allow-Origin','http://localhost:8100')
   res.setHeader('Access-Control-Allow-Methods','GET,POST,DELETE,UPDATE')
