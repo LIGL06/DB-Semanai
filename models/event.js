@@ -42,9 +42,11 @@ email: {
 var comment_schema = new Schema({
   idLugar: {type: String,ref:'Place'},
   idUser: String,
+  username: String,
   picUser: String,
   comment: String,
-  rate: {type:Number, min:[1,"Debe ser mayor a 1"],max:[5,"Debe ser menor a 5"]}
+  rate: {type:Number, min:[1,"Debe ser mayor a 1"],max:[5,"Debe ser menor a 5"]},
+  date: String
 })
 
 var cat_schema = new Schema({
@@ -64,10 +66,11 @@ var qr_chema = new Schema({
   imagen: String
 })
 
-var Comments = mongoose.model('Comment', comment_schema);
+var Comment = mongoose.model('Comment', comment_schema);
 var User = mongoose.model('User',user_schema);
 var Place = mongoose.model('Place', place_schema);
 var Qr = mongoose.model('Qr', qr_chema);
+module.exports.Comments = Comment;
 module.exports.Place = Place;
 module.exports.User = User;
 module.exports.Qr = Qr;

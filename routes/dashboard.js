@@ -23,7 +23,7 @@ router.get('/',stormpath.loginRequired,function(req, res, next) {
   res.render('dashboard', { title: 'Panel de Administración' });
 });
 
-router.get('/place/:id',stormpath.loginRequired,function(req, res, next) {
+router.get('/place/:id',function(req, res, next) {
   Place.findOne({_id:req.params.id}, function(err,doc){
     res.render('place', {place:doc, title: 'Objeto'})
   })
