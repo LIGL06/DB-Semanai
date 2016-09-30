@@ -9,6 +9,7 @@ var storage = multer.diskStorage({destination: 'public/uploads/',filename: funct
 var upload = multer({storage:storage})
 var Place = require('../models/event').Place;
 var Comment = require('../models/event').Comment;
+var Qr = require('../models/event').Qr;
 var router = express.Router();
 
 /* GET home page. */
