@@ -11,7 +11,7 @@ var dashboard = require('./routes/dashboard');
 var api = require('./routes/api');
 //var events = require('./routes/events');
 var users = require('./routes/users');
-var port = process.env.PORT||5000;
+var port = process.env.PORT||80;
 
 var app = express();
 
@@ -24,7 +24,7 @@ app.set('view engine', 'jade');
 app.use(methodOverride('_method'))
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(stormpath.init(app, {

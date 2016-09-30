@@ -55,6 +55,20 @@ router.get('/sitios/comments/:id', function(req, res,next){
   })
 })
 
+router.get('/qr/:id',function(req, res, next){
+  Qr.findOne({_id:req.params.id},function(err,doc){
+    if (err) {
+      res.send(err)
+    }else {
+      res.setHeader('Access-Control-Allow-Origin','http://localhost:8100')
+    res.setHeader('Access-Control-Allow-Methods','GET,POST,DELETE,UPDATE')
+    res.setHeader('Access-Control-Allow-Headers','X-Requested-with,content-type')
+    res.setHeader('Access-Control-Allow-Cerenditials',false)
+    res.send(doc)
+    }
+  })
+})
+
 router.get('/imagenes/:id',function(req, res, next){
   Place.findOne({_id:req.params.id},function(err,doc){
     if (err) {
