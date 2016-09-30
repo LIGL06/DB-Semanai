@@ -42,7 +42,7 @@ router.get('/sitios/:id',function(req, res, next){
 
 
 router.get('/sitios/comments/:id', function(req, res,next){
-  Comment.findOne({idLugar:req.params.id},function(err,doc){
+  Comment.find({idLugar:req.params.id},function(err,doc){
     if (err) {
       res.send(err)
     }else {
