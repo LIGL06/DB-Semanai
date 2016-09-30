@@ -6,7 +6,7 @@ var multer = require('multer');
 var methodOverride = require('method-override');
 var qr = require('qr-image');
 var storage = multer.diskStorage({destination: 'public/uploads/',filename: function(req,file,cb){
-  cb(null, Date.now()+'.jpg')
+  cb(null, (Math.random().toString(36)+'ff').slice(2, 10)+'.jpg')
 }});
 cloudinary.config({
   cloud_name: 'hammock-software',

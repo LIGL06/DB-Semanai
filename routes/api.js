@@ -60,12 +60,12 @@ router.get('/imagenes/:id',function(req, res, next){
     if (err) {
       res.send(err)
     }else {
-
+      var arary = [doc.bgLugar,doc.fotos]
       res.setHeader('Access-Control-Allow-Origin','http://localhost:8100')
       res.setHeader('Access-Control-Allow-Methods','GET,POST,DELETE,UPDATE')
       res.setHeader('Access-Control-Allow-Headers','X-Requested-with,content-type')
       res.setHeader('Access-Control-Allow-Cerenditials',false)
-      res.send(doc.bgLugar)
+      res.send(arary)
     }
   })
 })
