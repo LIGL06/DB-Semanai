@@ -1,16 +1,15 @@
 var mongoose = require('mongoose');
-var autoIncrement = require('mongoose-auto-increment');
 var Schema = mongoose.Schema;
-
 var mongoUrl = 'mongodb://localhost/semanai'
-var connection = mongoose.createConnection(mongoUrl)
-autoIncrement.initialize(connection);
-
-
+mongoose.connect(mongoUrl, function(error){
+  if (error) {
+    throw error;
+  }
+  console.log('Conexión a BD...')
+})
 var email_match = [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ , "Coloca un email válido "];
 
 var place_schema = new Schema({
-  seq: {type: Number, default: 0},
   nombreLugar: String,
   subnombreLugar: String,
   caterogiaLugar: String,
@@ -58,13 +57,17 @@ var foto_schema = new Schema({
 })
 
 var qr_chema = new Schema({
-
+  tipoQr: String,
+  idRef: String,
+  nombre: String,
+  descripcion: String,
+  imagen: String
 })
-
-place_schema.plugin(autoIncrement.plugin,'Place');
 
 var Comments = mongoose.model('Comment', comment_schema);
 var User = mongoose.model('User',user_schema);
 var Place = mongoose.model('Place', place_schema);
+var Qr = mongoose.model('Qr', qr_chema);
 module.exports.Place = Place;
 module.exports.User = User;
+module.exports.Qr = Qr;

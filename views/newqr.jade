@@ -1,0 +1,26 @@
+extends loggedlayout
+//AIzaSyCzLwf3tEg1qjAr0U4n8bUbmvh8FZK2JeM
+block content
+  .container(ng-style="style")
+    .row
+      .col-xs-12.col-md-12
+        .panel.panel-default
+          .panel-body
+            p.text-center Opciones de #{title}
+            form#new(method='POST', action='/dashboard/qr/new', enctype='multipart/form-data')
+              .hidden.form-group.col-md-6
+                input(type='text',value='info')
+              .form-group.col-md-6
+                label(for='nombre') Titulo
+                input#nombre.form-control(type='text',name='nombre')
+              .form-group.col-md-6
+                label(for='descripcion') Descripción
+                input#descripcion.form-control(type='text',name='descripcion')
+              .form-group.col-md-6
+                label(for='descripcion') Imagen
+                input#imagen.form-control(type='file',name='imagen')
+              .form-group.col-md-12
+                input.btn.btn-info(type='submit', value='Guardar')
+  script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzLwf3tEg1qjAr0U4n8bUbmvh8FZK2JeM&callback=initMap" async defer)              button.btn.btn-info(type='submit') Guardar
+  script(src='/js/upload.min.js')
+  script(src='/js/map.js')

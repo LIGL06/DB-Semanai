@@ -15,11 +15,18 @@ cloudinary.config({
 })
 var upload = multer({storage:storage})
 var Place = require('../models/event').Place;
+var Qr = require('../models/event').Qr;
 var router = express.Router();
 
 /* GET home page. */
 router.get('/',stormpath.loginRequired,function(req, res, next) {
   res.render('dashboard', { title: 'Panel de Administración' });
+});
+
+router.get('/place/:id',stormpath.loginRequired,function(req, res, next) {
+  Place.findOne({_id:req.params.id}, function(err,doc){
+    res.render('place', {place:doc, title: 'Objeto'})
+  })
 });
 
 router.get('/events',stormpath.loginRequired,function(req, res, next) {
@@ -40,9 +47,18 @@ router.get('/events/:id',function(req, res, next){
   })
 })
 
-router.get('/qr/:id',function(req, res, next){
+router.get('/qrpanel', function(req, res,next){
+  Qr.find(function(err,doc){
+    if (err) {
+      res.send('Error')
+    }
+    res.render('qrpanel',{places:doc, title: 'Panel de Qr'})
+  })
+})
+
+router.get('/qr/get/:id',function(req, res, next){
   Place.findOne({_id:req.params.id}, function(err,doc){
-    var Buffer = 'Descripcion: '+doc.descLugar+' Historia: '+doc.historiaLugar
+    var Buffer = 'sitio'+','+req.params.id
     if (err) {
       res.redirect('/dashboard/events')
     }else {
@@ -53,13 +69,42 @@ router.get('/qr/:id',function(req, res, next){
   })
 })
 
+router.get('/qr/new',function(req, res, next){
+  res.render('newqr',{title:'Nuevos Qr'})
+})
+
+router.get('/qrpanel/get/:id',function(req, res, next){
+  Qr.findOne({_id:req.params.id}, function(err,doc){
+    var Buffer = doc.tipoQr+','+doc.idRef
+    if (err) {
+      res.redirect('/dashboard/events')
+    }else {
+      var code = qr.image(Buffer,{type: 'svg'})
+      res.type('svg')
+      code.pipe(res)
+    }
+  })
+})
+
+router.post('/qr/new',upload.single('imagen'),function(req, res, next){
+  var qr = new Qr({
+    tipoQr: 'info',
+    nombre: req.body.nombre,
+    descripcion: req.body.descripcion,
+    imagen: req.body.imagen
+  })
+  qr.idRef = qr.id;
+  qr.save().then(function(){
+    res.redirect('/dashboard/qrpanel')
+  })
+})
+
 router.get('/new',stormpath.loginRequired,function(req, res, next) {
   res.render('new', { title: 'Panel de nuevo punto de interes' });
 });
 
-router.post('/new',upload.array('fotoLugar',12),function(req, res, next){
+router.post('/new',upload.array('fotoLugar',3),function(req, res, next){
   var place = new Place({
-    idLugar: req.body.idLugar,
     nombreLugar: req.body.nombreLugar,
     subnombreLugar: req.body.subnombreLugar,
     descLugar: req.body.descLugar,
@@ -67,27 +112,31 @@ router.post('/new',upload.array('fotoLugar',12),function(req, res, next){
     latitudLugar: req.body.latitudLugar,
     longitudLugar: req.body.longitudLugar,
   })
-  // place.save().then(function(){
-  //   res.redirect('/dashboard/events')
-  // }, function(error){
-  //   if (error) {
-  //     res.send('¡Error!')
-  //   }
-  // })
   if (req.files) {
-    cloudinary.uploader.upload(req.files[0].path,function(result){
-      place.bgLugar = result.url;
+    place.bgLugar = req.files[0].filename;
+    place.fotos[0] = req.files[1].filename;
+    place.fotos[1] = req.files[2].filename;
+    place.save().then(function(){
+      res.redirect('/dashboard')
+    }, function(err){
+      if (err) {
+        console.log(err)
+        res.send(err)
+      }
     })
-    cloudinary.uploader.upload(req.files[1].path,function(result){
-      place.fotos[0] = result.url;
+    console.log(place.id)
+    var qr = new Qr({
+      tipoQr: 'sitio',
+      nombre: place.nombreLugar,
+      idRef: place.id
     })
-    cloudinary.uploader.upload(req.files[2].path,function(result){
-      place.fotos[1] = result.url;
-    })
-    res.send(place)
-  }else {
-    res.redirect('/dashboard/new')
+    qr.save()
+  }else{
+    place.bgLugar = "default.png";
+    res.redirect('/dashboard')
   }
+
+
 })
 
 router.get('/image',stormpath.loginRequired,function(req, res, next){

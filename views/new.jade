@@ -9,18 +9,15 @@ block content
             p.text-center Opciones de #{title}
             form#new(method='POST', action='/dashboard/new', enctype='multipart/form-data')
               .form-group.col-md-6
-                label(for='idLugar') Numero
-                input#idLugar.form-control(type='number', placeholder='Numero de punto de interes', name='idLugar')
-              .form-group.col-md-6
                 label(for='nombreLugar') Nombre punto de interes
                 input#nombreLugar.form-control(type='text', placeholder='Nombre punto de interes', name='nombreLugar')
               .form-group.col-md-6
                 label(for='subnombreLugar') Subnombre del punto de interes
                 input#subnombreLugar.form-control(type='text', placeholder='Subnombre del punto de interes', name='subnombreLugar')
-              .form-group.col-md-6
+              .form-group.col-md-12
                 label(for='descLugar') Descripción de punto de interes
                 input#descLugar.form-control(type='text', placeholder='Descripción del punto de interes', name='descLugar')
-              .form-group.col-md-9
+              .form-group.col-md-12
                 label(for='historiaLugar') Historia de punto de interes
                 input#historiaLugar.form-control(type='text', placeholder='Historia del punto de interes', name='historiaLugar')
               .form-group.col-md-12

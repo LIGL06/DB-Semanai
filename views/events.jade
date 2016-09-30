@@ -11,20 +11,19 @@ block content
     .row
       .col-xs-12.col-md-12
         h1.text-center Bienvenido a #{title}
+        a.btn.col-md-4(href='/dashboard/new',style='padding:10px;') Nuevo punto
         .panel.panel-default
           .panel-body
             table.table.table-stripped.table-responsive.text-left
               thead
                 tr
+                  th ID Referencia
                   th Nombre
-                  th Objeto
                   th JSON
-                  th Categoría
                   th Acciones
               each place in places
                 tr
-                  td #{place.nombreLugar} #[img(src='#{place.bgLugar}')]
-                  td #{place.idLugar}
+                  td #{place._id}
+                  td #{place.nombreLugar} #[a(href='/dashboard/place/#{place._id}',target='_blank') Información]
                   td #[a(href='/dashboard/events/#{place._id}', target='_blank') Ver JSON]
-                  td #{place.caterogiaLugar}
-                  td #[a(href='/dashboard/qr/#{place._id}', target='_blank') QR] #[a(href='/dashboard/edit/#{place._id}') Editar] #[a(href='/dashboard/delete/#{place._id}') Eliminar]
+                  td #[a(href='/dashboard/qr/get/#{place._id}', target='_blank') QR] #[a(href='/dashboard/edit/#{place._id}') Editar] #[a(href='/dashboard/delete/#{place._id}') Eliminar]

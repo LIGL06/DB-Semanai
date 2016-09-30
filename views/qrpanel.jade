@@ -1,0 +1,27 @@
+extends loggedlayout
+//idLugar: Number,
+//nombreLugar: String,
+//subnombreLugar: String,
+//descLugar: String,
+//historiaLugar: String,
+//fotoLugar: String,
+//coordenadasLugar:String,
+block content
+  .container
+    .row
+      .col-xs-12.col-md-12
+        h1.text-center Bienvenido a #{title}
+        a.btn.col-md-4(href='/dashboard/qr/new',style='padding:10px;') Nuevo Qr
+        .panel.panel-default
+          .panel-body
+            table.table.table-stripped.table-responsive.text-left
+              thead
+                tr
+                  th Tipo
+                  th Nombre
+                  th Acciones
+              each place in places
+                tr
+                  td #{place.tipoQr} 
+                  td #{place.nombre}
+                  td #[a(href='/dashboard/qrpanel/get/#{place._id}', target='_blank') QR]

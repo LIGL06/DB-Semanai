@@ -14,11 +14,15 @@ var router = express.Router();
 /* GET home page. */
 router.get('/',function(req, res, next) {
   Place.find(function(err,docs){
-    res.setHeader('Access-Control-Allow-Origin','http://localhost:8100')
-    res.setHeader('Access-Control-Allow-Methods','GET,POST,DELETE,UPDATE')
-    res.setHeader('Access-Control-Allow-Headers','X-Requested-with,content-type')
-    res.setHeader('Access-Control-Allow-Cerenditials',false)
-    res.send(docs)
+    if (docs) {
+      res.setHeader('Access-Control-Allow-Origin','http://localhost:8100')
+      res.setHeader('Access-Control-Allow-Methods','GET,POST,DELETE,UPDATE')
+      res.setHeader('Access-Control-Allow-Headers','X-Requested-with,content-type')
+      res.setHeader('Access-Control-Allow-Cerenditials',false)
+      res.send(docs)
+    }else {
+      res.send('No data')
+    }
   })
 });
 
